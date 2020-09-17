@@ -143,6 +143,24 @@ func (list *Sll) Length() int {
 	return list.lastIndex + 1
 }
 
+// ToArray : Returns the elements present in the list as an array, orders are same as of the list
+func (list *Sll) ToArray() []interface{} {
+	elementsArray := []interface{}{}
+	if list.head == nil {
+		return elementsArray
+	}
+
+	currentNode := list.head
+	for {
+		elementsArray = append(elementsArray, currentNode.payload)
+		if currentNode.nextNode == nil {
+			break
+		}
+		currentNode = currentNode.nextNode
+	}
+	return elementsArray
+}
+
 // InitList : Instantiate a new linked list
 func InitList(payload interface{}) *Sll {
 	list := new(Sll)
