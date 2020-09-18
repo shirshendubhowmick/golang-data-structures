@@ -182,6 +182,12 @@ func (list *Sll) ToArray() []interface{} {
 	return elementsArray
 }
 
+// Clear : Clears the list
+func (list *Sll) Clear() {
+	list.head = nil
+	list.lastNode = nil
+}
+
 // InitList : Instantiate a new linked list
 func InitList(payload interface{}) *Sll {
 	list := new(Sll)
