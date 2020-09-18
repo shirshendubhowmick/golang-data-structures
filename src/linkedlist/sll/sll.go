@@ -122,6 +122,27 @@ func (list *Sll) Get(index int) (interface{}, bool) {
 	return previousNode.nextNode, true
 }
 
+// IndexOf : Finds first occurance given payload in the list, if found returns its index else -1
+func (list *Sll) IndexOf(payload interface{}) (int, bool) {
+	currentNode := list.head
+	if currentNode == nil {
+		fmt.Println("Empty list")
+		return -1, false
+	}
+	i := 0
+	for {
+		if currentNode.payload == payload {
+			return i, true
+		}
+		if currentNode.nextNode == nil {
+			break
+		}
+		currentNode = currentNode.nextNode
+		i++
+	}
+	return -1, false
+}
+
 //Print : Print the list in using fmt.Println canbe used for debugging
 func (list *Sll) Print() {
 	currentNode := list.head
