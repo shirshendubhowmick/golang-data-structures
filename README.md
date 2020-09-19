@@ -5,8 +5,8 @@ Packages of commonly used data structures and algorithms. Supports go module.
 ## Table of contents
 * [Quickstart](#Quickstart)
 * [Installation](#Installation)
-* [Directory structure](#Directory%20structure)
-* [Package contents](#Package%20contents)
+* [Directory structure](#Directory-structure)
+* [Package contents](#Package-contents)
 
 ## Quickstart
 
