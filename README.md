@@ -14,7 +14,7 @@ Packages of commonly used data structures and algorithms. Supports go module.
 package main
 
 import (
-	Sll "github.com/shirshendubhowmick/golang-data-structures/src/linkedlist/sll"
+	Sll "github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/sll"
 )
 
 func main() {
@@ -51,7 +51,7 @@ This was developved in go `v1.15` and not tested in any other lower version as o
 Inside your main module run
 
 ```bash
-go get github.com/shirshendubhowmick/golang-data-structures/src
+go get github.com/shirshendubhowmick/golang-data-structures/pkg
 ```
 
 
