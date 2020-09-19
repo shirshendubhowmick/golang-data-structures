@@ -57,13 +57,15 @@ go get github.com/shirshendubhowmick/golang-data-structures/src
 
 ## Directory structure
 
-This repo uses go modules, `src` is the module directory and it contains all the packages.
+This repo uses go modules, `pkg` is the module directory and it contains all the packages.
 Packages are distributed based on their data structure.
 For example
 
-`src/linkedlist` contains packages `sll`, `dll` etc
+`pkg/linkedlist` contains packages `sll`, `dll` etc
 
-`src/tree` contains packages `btree`, `avltree` etc
+`pkg/tree` contains packages `btree`, `avltree` etc
+
+Any packages inside an `internal` directory are meant for internal use, do not consume them directly.
 
 <br>
 Examples are located in `examples` directory, they are also distributed in the same way as packages.
