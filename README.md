@@ -2,24 +2,11 @@
 
 Packages of commonly used data structures and algorithms. Supports go module.
 
-## Contents
-
-* Linked List
-  * Singly linked list
-  * Doubly linked list
-  * Circular linked list
-
-* Stack
-  * Array stack
-  * Linked List stack
-
-* Queue
-  * Normal queue
-  * Priority queue
-  * Deque
-  * Circular queue
-
-Many more coming soon...
+## Table of contents
+* [Quickstart](#Quickstart)
+* [Installation](#Installation)
+* [Directory structure](#Directory%20structure)
+* [Package contents](#Package%20contents)
 
 ## Quickstart
 
@@ -56,7 +43,6 @@ func main() {
 
 	list.Print()
 }
-
 ```
 
 ## Installation
@@ -84,6 +70,26 @@ Examples are located in `examples` directory, they are also distributed in the s
 For example
 
 `examples/linkedlist` directory contains all examples related to linked lists
+
+## Package contents
+
+* Linked List
+  * Singly linked list
+  * Doubly linked list
+  * Circular linked list
+
+* Stack
+  * Array stack
+  * Linked List stack
+
+* Queue
+  * Normal queue
+  * Priority queue
+  * Deque
+  * Circular queue
+
+Many more coming soon...
+
 
 
 #### Note: Detailed documentation WIP
