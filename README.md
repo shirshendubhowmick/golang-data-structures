@@ -21,6 +21,54 @@ Packages of commonly used data structures and algorithms. Supports go module.
 
 Many more coming soon...
 
+## Quickstart
+
+```go
+package main
+
+import (
+	Sll "github.com/shirshendubhowmick/golang-data-structures/src/linkedlist/sll"
+)
+
+func main() {
+	list := Sll.InitList(1)
+
+	list.Append(2)
+	list.Append(3)
+	list.Append(4)
+	list.Append(5)
+	list.Prepend(6)
+	list.Prepend(7)
+
+	list.Print()
+
+	list.Remove(0)
+	list.Remove(4)
+	list.Remove(5)
+
+	list.Replace(0, 100)
+	list.Clear()
+  
+	list.Append(2)
+	list.Append(5)
+	list.Prepend(6)
+	list.Prepend(7)
+
+	list.Print()
+}
+
+```
+
+## Installation
+This was developved in go `v1.15` and not tested in any other lower version as of now.
+
+Inside your main module run
+
+```bash
+go get github.com/shirshendubhowmick/golang-data-structures/src
+```
+
+
 ## Directory structure
 
 This repo uses go modules, `src` is the module directory and it contains all the packages.
