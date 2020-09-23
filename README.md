@@ -14,32 +14,37 @@ Packages of commonly used data structures and algorithms. Supports go module.
 package main
 
 import (
-	Sll "github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/sll"
+	"fmt"
+	"github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/sll"
 )
 
 func main() {
-	list := Sll.InitList(1)
+	list := sll.InitList(4)
 
-	list.Append(2)
-	list.Append(3)
-	list.Append(4)
 	list.Append(5)
-	list.Prepend(6)
-	list.Prepend(7)
+	list.Append(6)
+	list.Append(7)
+	list.Append(8)
+
+	list.Prepend(3)
+	list.Prepend(2)
+	list.Prepend(1)
+	list.Prepend(0)
 
 	list.Print()
 
-	list.Remove(0)
 	list.Remove(4)
-	list.Remove(5)
 
-	list.Replace(0, 100)
+	list.Print()
+
+	fmt.Println(list.Get(4))
+
+	fmt.Println(list.IndexOf(8))
+	list.Replace(7, 99)
+	list.Print()
+	fmt.Println(list.ToSlice())
+	fmt.Println(list.Length())
 	list.Clear()
-  
-	list.Append(2)
-	list.Append(5)
-	list.Prepend(6)
-	list.Prepend(7)
 
 	list.Print()
 }
@@ -71,12 +76,12 @@ Any packages inside an `internal` directory are meant for internal use, do not c
 Examples are located in `examples` directory, they are also distributed in the same way as packages.
 For example
 
-`examples/linkedlist` directory contains all examples related to linked lists
+`examples/linkedList` directory contains all examples related to linked lists
 
 ## Package contents
 
-* Linked List
-  * Singly linked list
+* [Linked lists](#Linked-lists)
+  * [Singly linked list](#Singly-linked-list)
   * Doubly linked list
   * Circular linked list
 
@@ -92,6 +97,19 @@ For example
 
 Many more coming soon...
 
+
+## Linked lists
+All linked lists uses type `interface {}` for the payload, as the list allows any type of data to be stored and also internally doesn't perform any operations on the payload.
+
+It is recommended that consumer of linked lists define a proper type to the payload, to have compile time type safety. As it is expected that consumers are going to perform operations on the payload.
+
+* ### Singly linked list
+  Package location:
+ `github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/sll`
+
+  [See examples](examples/linkedList/singlyLinkedList/)
+  
+	
 
 
 #### Note: Detailed documentation WIP
