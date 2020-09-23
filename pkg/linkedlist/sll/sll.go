@@ -16,7 +16,7 @@ type Sll struct {
 	lastIndex int
 }
 
-//Append : Append a node to the end of the list
+// Append : Append a node to the end of the list
 func (list *Sll) Append(payload interface{}) {
 	newNode := new(node)
 	newNode.payload = payload
@@ -29,7 +29,7 @@ func (list *Sll) Append(payload interface{}) {
 	list.lastIndex++
 }
 
-//Prepend : Prepend a node to the begining of the list
+// Prepend : Prepend a node to the begining of the list
 func (list *Sll) Prepend(payload interface{}) {
 	newNode := new(node)
 	newNode.payload = payload
@@ -164,8 +164,8 @@ func (list *Sll) Length() int {
 	return list.lastIndex + 1
 }
 
-// ToArray : Returns the elements present in the list as an array, orders are same as of the list
-func (list *Sll) ToArray() []interface{} {
+// ToSlice : Returns the elements present in the list as an array, orders are same as of the list
+func (list *Sll) ToSlice() []interface{} {
 	elementsArray := []interface{}{}
 	if list.head == nil {
 		return elementsArray
