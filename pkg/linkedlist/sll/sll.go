@@ -33,8 +33,12 @@ func (list *Sll) Append(payload interface{}) {
 func (list *Sll) Prepend(payload interface{}) {
 	newNode := new(node)
 	newNode.payload = payload
-	newNode.nextNode = list.head
-	list.head = newNode
+	if list.lastNode == nil {
+		list.head, list.lastNode = newNode, newNode
+	} else {
+		newNode.nextNode = list.head
+		list.head = newNode
+	}
 	list.lastIndex++
 }
 
