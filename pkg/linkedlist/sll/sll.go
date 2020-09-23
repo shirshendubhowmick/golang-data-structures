@@ -50,10 +50,10 @@ func (list *Sll) Remove(index int) (interface{}, bool) {
 		if list.head == list.lastNode {
 			list.head = nil
 			list.lastNode = nil
-			return temp, true
+			return temp.payload, true
 		}
 		list.head = list.head.nextNode
-		return temp, true
+		return temp.payload, true
 	}
 
 	previousNode := list.head
@@ -65,7 +65,7 @@ func (list *Sll) Remove(index int) (interface{}, bool) {
 	temp := previousNode.nextNode
 	previousNode.nextNode = temp.nextNode
 	list.lastIndex--
-	return temp, true
+	return temp.payload, true
 }
 
 // Replace : Replace a node a gven index with a new node
@@ -81,7 +81,7 @@ func (list *Sll) Replace(index int, payload interface{}) (interface{}, bool) {
 		temp := list.head
 		newNode.nextNode = temp.nextNode
 		list.head = newNode
-		return temp, true
+		return temp.payload, true
 	}
 
 	previousNode := list.head
@@ -96,7 +96,7 @@ func (list *Sll) Replace(index int, payload interface{}) (interface{}, bool) {
 	}
 	previousNode.nextNode = newNode
 	newNode.nextNode = temp.nextNode
-	return temp, true
+	return temp.payload, true
 }
 
 // Get : Get a node from specified index
@@ -106,11 +106,11 @@ func (list *Sll) Get(index int) (interface{}, bool) {
 	}
 
 	if index == 0 {
-		return list.head, true
+		return list.head.payload, true
 	}
 
 	if index == list.lastIndex {
-		return list.lastNode, true
+		return list.lastNode.payload, true
 	}
 
 	previousNode := list.head
@@ -119,7 +119,7 @@ func (list *Sll) Get(index int) (interface{}, bool) {
 		previousNode = previousNode.nextNode
 	}
 
-	return previousNode.nextNode, true
+	return previousNode.nextNode.payload, true
 }
 
 // IndexOf : Finds first occurance given payload in the list, if found returns its index else -1
