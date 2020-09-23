@@ -82,7 +82,7 @@ For example
 
 * [Linked lists](#Linked-lists)
   * [Singly linked list](#Singly-linked-list)
-  * Doubly linked list
+  * [Doubly linked list](#Doubly-linked-list)
   * Circular linked list
 
 * Stack
@@ -108,8 +108,14 @@ It is recommended that consumer of linked lists define a proper type to the payl
  `github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/sll`
 
   [See examples](examples/linkedList/singlyLinkedList/)
-  
-	
 
+
+* ### Doubly linked list
+  Package location:
+ `github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/dll`
+
+  [See examples](examples/linkedList/doublyLinkedList/)
+  
+  
 
 #### Note: Detailed documentation WIP
