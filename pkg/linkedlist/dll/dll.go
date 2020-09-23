@@ -33,9 +33,13 @@ func (list *Dll) Append(payload interface{}) {
 func (list *Dll) Prepend(payload interface{}) {
 	newNode := new(node)
 	newNode.payload = payload
-	newNode.nextNode = list.head
-	list.head.previousNode = newNode
-	list.head = newNode
+	if list.head == nil {
+		list.head, list.lastNode = newNode, newNode
+	} else {
+		newNode.nextNode = list.head
+		list.head.previousNode = newNode
+		list.head = newNode
+	}
 	list.lastIndex++
 }
 
