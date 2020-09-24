@@ -4,21 +4,22 @@ import (
 	"fmt"
 )
 
-type node struct {
+// Node : A struct describing the node has payload and a pointer to the next node in the list
+type Node struct {
 	payload  interface{}
-	nextNode *node
+	nextNode *Node
 }
 
 // Sll : A singly linked list which hols the elements
 type Sll struct {
-	head      *node
-	lastNode  *node
+	head      *Node
+	lastNode  *Node
 	lastIndex int
 }
 
 // Append : Append a node to the end of the list
-func (list *Sll) Append(payload interface{}) {
-	newNode := new(node)
+func (list *Sll) Append(payload interface{}) *Node {
+	newNode := new(Node)
 	newNode.payload = payload
 	if list.lastNode == nil {
 		list.head, list.lastNode = newNode, newNode
@@ -27,11 +28,12 @@ func (list *Sll) Append(payload interface{}) {
 		list.lastNode = newNode
 	}
 	list.lastIndex++
+	return newNode
 }
 
 // Prepend : Prepend a node to the begining of the list
-func (list *Sll) Prepend(payload interface{}) {
-	newNode := new(node)
+func (list *Sll) Prepend(payload interface{}) *Node {
+	newNode := new(Node)
 	newNode.payload = payload
 	if list.lastNode == nil {
 		list.head, list.lastNode = newNode, newNode
@@ -40,10 +42,11 @@ func (list *Sll) Prepend(payload interface{}) {
 		list.head = newNode
 	}
 	list.lastIndex++
+	return newNode
 }
 
-// Remove : Remove node from specified index
-func (list *Sll) Remove(index int) (interface{}, bool) {
+// RemoveByIndex : Remove node from specified index
+func (list *Sll) RemoveByIndex(index int) (interface{}, bool) {
 	if index > list.lastIndex || index < 0 || list.head == nil {
 		return nil, false
 	}
@@ -72,20 +75,20 @@ func (list *Sll) Remove(index int) (interface{}, bool) {
 	return temp.payload, true
 }
 
-// Replace : Replace a node a gven index with a new node
-func (list *Sll) Replace(index int, payload interface{}) (interface{}, bool) {
+// ReplaceByIndex : Replace a node with a new node created with a given payload dpending upon the index. Returns the old node payload, newly created node, ok
+func (list *Sll) ReplaceByIndex(index int, payload interface{}) (interface{}, *Node, bool) {
 	if index > list.lastIndex || index < 0 || list.head == nil {
-		return nil, false
+		return nil, nil, false
 	}
 
-	newNode := new(node)
+	newNode := new(Node)
 	newNode.payload = payload
 
 	if index == 0 {
 		temp := list.head
 		newNode.nextNode = temp.nextNode
 		list.head = newNode
-		return temp.payload, true
+		return temp.payload, newNode, true
 	}
 
 	previousNode := list.head
@@ -100,21 +103,55 @@ func (list *Sll) Replace(index int, payload interface{}) (interface{}, bool) {
 	}
 	previousNode.nextNode = newNode
 	newNode.nextNode = temp.nextNode
-	return temp.payload, true
+	return temp.payload, newNode, true
+}
+
+// ReplaceByNode : Replace a node with a new node created with a given payload dpending upon a node reference. Returns the old node payload, newly created node, ok
+func (list *Sll) ReplaceByNode(nodeToBeReplaced *Node, payload interface{}) (interface{}, *Node, bool) {
+	var currentNode *Node
+	var previousNode *Node
+	for currentNode = list.head; currentNode != nil; previousNode, currentNode = currentNode, currentNode.nextNode {
+		if currentNode == nodeToBeReplaced {
+			break
+		}
+	}
+
+	if previousNode == nil && currentNode == nodeToBeReplaced {
+		newNode := new(Node)
+		newNode.payload = payload
+		newNode.nextNode = currentNode.nextNode
+		list.head = newNode
+		return currentNode.payload, newNode, true
+	}
+
+	if currentNode == nodeToBeReplaced {
+		newNode := new(Node)
+		newNode.payload = payload
+		if currentNode == list.lastNode {
+			list.lastNode = newNode
+		} else {
+			newNode.nextNode = currentNode.nextNode.nextNode
+		}
+		previousNode.nextNode = newNode
+
+		return currentNode.payload, newNode, true
+	}
+
+	return nil, nil, false
 }
 
 // Get : Get a node from specified index
-func (list *Sll) Get(index int) (interface{}, bool) {
+func (list *Sll) Get(index int) (*Node, bool) {
 	if index > list.lastIndex || index < 0 {
 		return nil, false
 	}
 
 	if index == 0 {
-		return list.head.payload, true
+		return list.head, true
 	}
 
 	if index == list.lastIndex {
-		return list.lastNode.payload, true
+		return list.lastNode, true
 	}
 
 	previousNode := list.head
@@ -123,7 +160,7 @@ func (list *Sll) Get(index int) (interface{}, bool) {
 		previousNode = previousNode.nextNode
 	}
 
-	return previousNode.nextNode.payload, true
+	return previousNode.nextNode, true
 }
 
 // IndexOf : Finds first occurance given payload in the list, if found returns its index else -1
@@ -195,7 +232,7 @@ func (list *Sll) Clear() {
 // InitList : Instantiate a new linked list
 func InitList(payload interface{}) *Sll {
 	list := new(Sll)
-	list.head = &node{
+	list.head = &Node{
 		payload: payload,
 	}
 	list.lastNode = list.head
