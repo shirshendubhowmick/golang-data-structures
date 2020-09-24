@@ -10,7 +10,7 @@ func main() {
 
 	list.Append(5)
 	list.Append(6)
-	list.Append(7)
+	nodeTobeReplace := list.Append(7)
 	list.Append(8)
 
 	list.Prepend(3)
@@ -20,18 +20,20 @@ func main() {
 
 	list.Print()
 
-	list.Remove(4)
+	list.RemoveByIndex(4)
 
 	list.Print()
 
 	fmt.Println(list.Get(4))
 
 	fmt.Println(list.IndexOf(8))
-	list.Replace(7, 99)
+	list.ReplaceByIndex(7, 99)
 	list.Print()
 	fmt.Println(list.ToSlice())
 	fmt.Println(list.Length())
-	list.Clear()
 
+	list.Print()
+
+	fmt.Println(list.ReplaceByNode(nodeTobeReplace, 1000))
 	list.Print()
 }
