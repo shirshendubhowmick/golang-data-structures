@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// Node : A struct describing the node has payload and a pointer to the next node in the list
+// Node : A struct describing the node has Payload and a pointer to the next node in the list
 type Node struct {
 	Payload  interface{}
 	nextNode *Node
