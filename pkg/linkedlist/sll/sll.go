@@ -140,6 +140,64 @@ func (list *Sll) ReplaceByNode(nodeToBeReplaced *Node, payload interface{}) (int
 	return nil, nil, false
 }
 
+// InsertAt : Insert a node at at particular index, the current node at that index gets shifted.
+// 0 <= index < length. Returns pointer to newly inserted node, ok
+func (list *Sll) InsertAt(index int, payload interface{}) (*Node, bool) {
+	if index > list.lastIndex || index < 0 || list.Head == nil {
+		return nil, false
+	}
+
+	currentNode := list.Head
+	for i := 1; i < index; i++ {
+		currentNode = currentNode.nextNode
+	}
+
+	newNode := new(Node)
+	newNode.Payload = payload
+	newNode.nextNode = currentNode.nextNode
+	currentNode.nextNode = newNode
+	if index == list.lastIndex {
+		list.LastNode = newNode
+	}
+	list.lastIndex++
+	return newNode, true
+}
+
+// InsertAfter : Insert a node after a given node. Returns pointer to newly inserted node, ok
+func (list *Sll) InsertAfter(referenceNode *Node, payload interface{}) (*Node, bool) {
+	newNode := new(Node)
+	newNode.Payload = payload
+	newNode.nextNode = referenceNode.nextNode
+	referenceNode.nextNode = newNode
+	if referenceNode == list.LastNode {
+		list.LastNode = newNode
+	}
+	list.lastIndex++
+	return newNode, true
+}
+
+// InsertBefore : Insert a node before a given node. Returns pointer to newly inserted node, ok
+func (list *Sll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, bool) {
+	var previousNode *Node
+	for previousNode = list.Head; previousNode.nextNode != nil; previousNode = previousNode.nextNode {
+		if previousNode.nextNode == referenceNode {
+			break
+		}
+	}
+
+	if previousNode == list.Head {
+		return list.Prepend(payload), true
+	} else if previousNode != nil {
+		newNode := new(Node)
+		newNode.Payload = payload
+		newNode.nextNode = previousNode.nextNode
+		previousNode.nextNode = newNode
+		return newNode, true
+	}
+
+	return nil, false
+}
+
 // Get : Get a node from specified index
 func (list *Sll) Get(index int) (*Node, bool) {
 	if index > list.lastIndex || index < 0 {
