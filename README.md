@@ -80,16 +80,16 @@ For example
 
 ## Package contents
 
-* [Linked lists](#Linked-lists)
+* [**Linked lists**](#Linked-lists)
   * [Singly linked list](#Singly-linked-list)
   * [Doubly linked list](#Doubly-linked-list)
   * Circular linked list
 
-* Stack
+* **Stack**
   * Array stack
   * Linked List stack
 
-* Queue
+* **Queue**
   * Normal queue
   * Priority queue
   * Deque
@@ -99,7 +99,7 @@ Many more coming soon...
 
 
 ## Linked lists
-All linked lists uses type `interface {}` for the payload, as the list allows any type of data to be stored and also internally doesn't perform any operations on the payload.
+All linked lists uses type `interface {}` for the payload, as the list allows any type of data to be stored and also internally it doesn't perform any operations on the payload.
 
 It is recommended that consumer of linked lists define a proper type to the payload, to have compile time type safety. As it is expected that consumers are going to perform operations on the payload.
 
@@ -108,6 +108,8 @@ It is recommended that consumer of linked lists define a proper type to the payl
  `github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/sll`
 
   [See examples](examples/linkedList/singlyLinkedList/)
+	
+	[Package README](pkg/linkedlist/sll)
 
 
 * ### Doubly linked list
@@ -115,6 +117,8 @@ It is recommended that consumer of linked lists define a proper type to the payl
  `github.com/shirshendubhowmick/golang-data-structures/pkg/linkedlist/dll`
 
   [See examples](examples/linkedList/doublyLinkedList/)
+	
+	[Package README](pkg/linkedlist/sll)
   
   
 
