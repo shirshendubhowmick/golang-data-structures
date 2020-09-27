@@ -173,6 +173,10 @@ func (list *Sll) InsertAt(index int, payload interface{}) (*Node, bool) {
 		return nil, false
 	}
 
+	if index == 0 {
+		return list.Prepend(payload), true
+	}
+
 	currentNode := list.Head
 	for i := 1; i < index; i++ {
 		currentNode = currentNode.nextNode
