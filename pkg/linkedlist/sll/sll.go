@@ -204,16 +204,19 @@ func (list *Sll) InsertAfter(referenceNode *Node, payload interface{}) (*Node, b
 
 // InsertBefore : Insert a node before a given node. Returns pointer to newly inserted node, ok
 func (list *Sll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, bool) {
-	var previousNode *Node
-	for previousNode = list.Head; previousNode.nextNode != nil; previousNode = previousNode.nextNode {
+	previousNode := list.Head
+	if previousNode == referenceNode {
+		return list.Prepend(payload), true
+	}
+
+	for previousNode.nextNode != nil {
 		if previousNode.nextNode == referenceNode {
 			break
 		}
+		previousNode = previousNode.nextNode
 	}
 
-	if previousNode == list.Head {
-		return list.Prepend(payload), true
-	} else if previousNode != nil {
+	if previousNode.nextNode != nil {
 		newNode := new(Node)
 		newNode.Payload = payload
 		newNode.nextNode = previousNode.nextNode
