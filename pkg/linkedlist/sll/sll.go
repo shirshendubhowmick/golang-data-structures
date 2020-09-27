@@ -75,6 +75,32 @@ func (list *Sll) RemoveByIndex(index int) (interface{}, bool) {
 	return temp.Payload, true
 }
 
+// RemoveByNode : Remove a node from the list based on its reference, returns node's payload, ok
+func (list *Sll) RemoveByNode(nodeToBeRemoved *Node) (interface{}, bool) {
+	if nodeToBeRemoved == list.Head {
+		return list.RemoveByIndex(0)
+	}
+
+	if nodeToBeRemoved == list.LastNode {
+		return list.RemoveByIndex(list.lastIndex)
+	}
+
+	var currentNode *Node
+	var previousNode *Node
+	for currentNode = list.Head.nextNode; currentNode.nextNode != list.LastNode; previousNode, currentNode = currentNode, currentNode.nextNode {
+		if currentNode == nodeToBeRemoved {
+			break
+		}
+	}
+
+	if currentNode == nodeToBeRemoved {
+		previousNode.nextNode = currentNode.nextNode
+		return currentNode.Payload, true
+	}
+
+	return nil, false
+}
+
 // ReplaceByIndex : Replace a node with a new node created with a given payload dpending upon the index. Returns the old node payload, newly created node, ok
 func (list *Sll) ReplaceByIndex(index int, payload interface{}) (interface{}, *Node, bool) {
 	if index > list.lastIndex || index < 0 || list.Head == nil {
