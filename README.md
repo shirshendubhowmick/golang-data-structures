@@ -101,13 +101,18 @@ For example
 
 * **Stack**
   * Array stack
-  * Linked List stack
+  * Linked list stack
 
 * **Queue**
   * Normal queue
   * Priority queue
   * Deque
   * Circular queue
+
+* **Tree**
+	* Binary search tree
+	* AVL tree
+	* B Tree
 
 Many more coming soon...
 
