@@ -136,6 +136,11 @@ Where `n` is the length of the list.
 ```go
 func (list *Sll) InsertAfter(referenceNode *Node, payload interface{}) (*Node, bool)
 ```
+Insert a new node created with the supplied payload after a specific node. Returns a pointer to newly inserted node
+and an ok value.
+
+Time complexity:
+`O(1)`
 
 <br><br>
 
@@ -143,6 +148,13 @@ func (list *Sll) InsertAfter(referenceNode *Node, payload interface{}) (*Node, b
 ```go
 func (list *Sll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, bool)
 ```
+Insert a new node created with the supplied payload before a specific node. Returns a pointer to newly inserted node
+and an ok value.
+
+Average time complexity:
+`O(n)`
+
+Where `n` is the length of the list.
 
 <br><br>
 
@@ -150,6 +162,12 @@ func (list *Sll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, 
 ```go
 func (list *Sll) Get(index int) (*Node, bool)
 ```
+Get the node reference (pointer to the node) at a specific index. Returns a pointer to the node and an ok value.
+
+Average time complexity:
+`O(n)`
+
+Where `n` is the length of the list.
 
 <br><br>
 
@@ -157,6 +175,13 @@ func (list *Sll) Get(index int) (*Node, bool)
 ```go
 func (list *Sll) IndexOf(payload interface{}) (int, bool)
 ```
+Get the index of a node, returns the index and an ok value.
+Note that the comparison is done by using `==` operator
+
+Average time complexity:
+`O(n)`
+
+Where `n` is the length of the list.
 
 <br><br>
 
@@ -164,6 +189,12 @@ func (list *Sll) IndexOf(payload interface{}) (int, bool)
 ```go
 func (list *Sll) Print()
 ```
+Print the entire content of the list using `fmt`. Maybe used for debugging.
+
+Average time complexity:
+`O(n)`
+
+Where `n` is the length of the list.
 
 <br><br>
 
@@ -171,6 +202,10 @@ func (list *Sll) Print()
 ```go
 func (list *Sll) Length() int
 ```
+Returns the length (no. of nodes) of the list.
+
+Average time complexity:
+`O(1)`
 
 <br><br>
 
@@ -178,10 +213,19 @@ func (list *Sll) Length() int
 ```go
 func (list *Sll) ToSlice() []interface{}
 ```
+Returns the payloads of all the nodes in a slice, order being same of the nodes.
 
+Average time complexity:
+`O(n)`
+
+Where `n` is the length of the list.
 <br><br>
 
 #### Clear
 ```go
 func (list *Sll) Clear()
 ```
+Clears the list (removes all node)
+
+Average time complexity:
+`O(1)`
