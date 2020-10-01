@@ -23,3 +23,15 @@
   * [Length](#Length)
   * [ToSlice](#ToSlice)
   * [Clear](#Clear)
+
+### Functions
+
+#### InitList
+
+```go
+func InitList(payload interface{}) *Dll
+```
+
+Initialize a doubly linked list, accepts a payload of any type for the head node, returns a pointer to the list.
+
+### Methods
