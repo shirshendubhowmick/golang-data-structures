@@ -49,7 +49,7 @@ Time complexity:
 
 #### Prepend
 ```go
-func (list *Sll) Prepend(payload interface{}) *Node
+func (list *Dll) Prepend(payload interface{}) *Node
 ```
 Prepend a payload in the list as a node (i.e. change the head node), returns a pointer to the newly created node.
 
