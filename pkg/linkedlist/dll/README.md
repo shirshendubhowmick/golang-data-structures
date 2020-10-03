@@ -72,3 +72,14 @@ Average Time complexity:
 `O(index)`
 
 <br><br>
+
+#### RemoveByNode
+```go
+func (list *Sll) RemoveByNode(nodeToBeRemoved *Node) (interface{}, bool)
+```
+Remove a node by its reference, returns the payload of the node removed and an ok value.
+
+Average time complexity:
+`O(1)`
+
+<br><br>
