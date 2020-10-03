@@ -57,3 +57,18 @@ Time complexity:
 `O(1)`
 
 <br><br>
+
+#### RemoveByIndex
+```go
+func (list *Dll) RemoveByIndex(index int) (interface{}, bool)
+```
+Remove a node at a spcified index, returns the payload of the node removed and an ok value.
+
+0 <= index <= n
+
+Where `n` is the length of the list.
+
+Average Time complexity:
+`O(index)`
+
+<br><br>
