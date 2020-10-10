@@ -2,22 +2,23 @@ package dll
 
 import "fmt"
 
-type node struct {
+// Node : A struct describing the node, has Payload and pointers to the next node and previous node in the list
+type Node struct {
 	payload      interface{}
-	previousNode *node
-	nextNode     *node
+	previousNode *Node
+	nextNode     *Node
 }
 
 // Dll : A doubly linked list which hols the elements
 type Dll struct {
-	head      *node
-	lastNode  *node
+	head      *Node
+	lastNode  *Node
 	lastIndex int
 }
 
 // Append : Append a node to the end of the list
 func (list *Dll) Append(payload interface{}) {
-	newNode := new(node)
+	newNode := new(Node)
 	newNode.payload = payload
 	if list.lastNode == nil {
 		list.head, list.lastNode = newNode, newNode
@@ -31,7 +32,7 @@ func (list *Dll) Append(payload interface{}) {
 
 // Prepend : Prepend a node to the begining of the list
 func (list *Dll) Prepend(payload interface{}) {
-	newNode := new(node)
+	newNode := new(Node)
 	newNode.payload = payload
 	if list.head == nil {
 		list.head, list.lastNode = newNode, newNode
@@ -70,7 +71,7 @@ func (list *Dll) Remove(index int) (interface{}, bool) {
 	}
 
 	adjacentNode := list.head
-	var temp *node
+	var temp *Node
 	if index > list.lastIndex/2 {
 		adjacentNode = list.lastNode
 		for i := list.lastIndex - 1; i > index; i-- {
@@ -98,7 +99,7 @@ func (list *Dll) Replace(index int, payload interface{}) (interface{}, bool) {
 		return nil, false
 	}
 
-	newNode := new(node)
+	newNode := new(Node)
 	newNode.payload = payload
 
 	if index == 0 {
@@ -118,7 +119,7 @@ func (list *Dll) Replace(index int, payload interface{}) (interface{}, bool) {
 	}
 
 	adjacentNode := list.head
-	var oldNode *node
+	var oldNode *Node
 	if index > list.lastIndex/2 {
 		adjacentNode = list.lastNode
 		for i := list.lastIndex - 1; i > index; i-- {
@@ -144,17 +145,17 @@ func (list *Dll) Replace(index int, payload interface{}) (interface{}, bool) {
 }
 
 // Get : Get a node from specified index
-func (list *Dll) Get(index int) (interface{}, bool) {
+func (list *Dll) Get(index int) (*Node, bool) {
 	if index > list.lastIndex || index < 0 {
 		return nil, false
 	}
 
 	if index == 0 {
-		return list.head.payload, true
+		return list.head, true
 	}
 
 	if index == list.lastIndex {
-		return list.lastNode.payload, true
+		return list.lastNode, true
 	}
 
 	adjacentNode := list.head
@@ -163,12 +164,12 @@ func (list *Dll) Get(index int) (interface{}, bool) {
 		for i := list.lastIndex - 1; i > index; i-- {
 			adjacentNode = adjacentNode.previousNode
 		}
-		return adjacentNode.previousNode.payload, true
+		return adjacentNode.previousNode, true
 	}
 	for i := 1; i < index; i++ {
 		adjacentNode = adjacentNode.nextNode
 	}
-	return adjacentNode.nextNode.payload, true
+	return adjacentNode.nextNode, true
 }
 
 // IndexOf : Finds first occurance given payload in the list, if found returns its index else -1
@@ -264,7 +265,7 @@ func (list *Dll) Clear() {
 // InitList : Instantiate a new linked list
 func InitList(payload interface{}) *Dll {
 	list := new(Dll)
-	list.head = &node{
+	list.head = &Node{
 		payload: payload,
 	}
 	list.lastNode = list.head
