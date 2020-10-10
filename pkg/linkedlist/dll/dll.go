@@ -144,6 +144,18 @@ func (list *Dll) Replace(index int, payload interface{}) (interface{}, bool) {
 	return oldNode.payload, true
 }
 
+// InsertBefore : Insert a node before a given node. Returns pointer to newly inserted node, ok
+func (list *Dll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, bool) {
+	newNode := new(Node)
+	newNode.payload = payload
+	newNode.nextNode = referenceNode
+	newNode.previousNode = referenceNode.previousNode
+	referenceNode.previousNode = newNode
+	newNode.previousNode.nextNode = newNode
+
+	return newNode, true
+}
+
 // Get : Get a node from specified index
 func (list *Dll) Get(index int) (*Node, bool) {
 	if index > list.lastIndex || index < 0 {
