@@ -167,6 +167,7 @@ func (list *Dll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, 
 	referenceNode.previousNode = newNode
 	newNode.previousNode.nextNode = newNode
 
+	list.lastIndex++
 	return newNode, true
 }
 
