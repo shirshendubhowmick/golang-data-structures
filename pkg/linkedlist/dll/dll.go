@@ -4,28 +4,28 @@ import "fmt"
 
 // Node : A struct describing the node, has Payload and pointers to the next node and previous node in the list
 type Node struct {
-	payload      interface{}
+	Payload      interface{}
 	previousNode *Node
 	nextNode     *Node
 }
 
 // Dll : A doubly linked list which hols the elements
 type Dll struct {
-	head      *Node
-	lastNode  *Node
+	Head      *Node
+	LastNode  *Node
 	lastIndex int
 }
 
 // Append : Append a node to the end of the list
 func (list *Dll) Append(payload interface{}) {
 	newNode := new(Node)
-	newNode.payload = payload
-	if list.lastNode == nil {
-		list.head, list.lastNode = newNode, newNode
+	newNode.Payload = payload
+	if list.LastNode == nil {
+		list.Head, list.LastNode = newNode, newNode
 	} else {
-		list.lastNode.nextNode = newNode
-		newNode.previousNode = list.lastNode
-		list.lastNode = newNode
+		list.LastNode.nextNode = newNode
+		newNode.previousNode = list.LastNode
+		list.LastNode = newNode
 	}
 	list.lastIndex++
 }
@@ -33,47 +33,47 @@ func (list *Dll) Append(payload interface{}) {
 // Prepend : Prepend a node to the begining of the list
 func (list *Dll) Prepend(payload interface{}) {
 	newNode := new(Node)
-	newNode.payload = payload
-	if list.head == nil {
-		list.head, list.lastNode = newNode, newNode
+	newNode.Payload = payload
+	if list.Head == nil {
+		list.Head, list.LastNode = newNode, newNode
 	} else {
-		newNode.nextNode = list.head
-		list.head.previousNode = newNode
-		list.head = newNode
+		newNode.nextNode = list.Head
+		list.Head.previousNode = newNode
+		list.Head = newNode
 	}
 	list.lastIndex++
 }
 
 // Remove : Remove node from specified index
 func (list *Dll) Remove(index int) (interface{}, bool) {
-	if index > list.lastIndex || index < 0 || list.head == nil {
+	if index > list.lastIndex || index < 0 || list.Head == nil {
 		return nil, false
 	}
 
 	if index == 0 {
-		temp := list.head
+		temp := list.Head
 		list.lastIndex--
-		if list.head == list.lastNode {
-			list.head = nil
-			list.lastNode = nil
-			return temp.payload, true
+		if list.Head == list.LastNode {
+			list.Head = nil
+			list.LastNode = nil
+			return temp.Payload, true
 		}
-		list.head = list.head.nextNode
-		list.head.previousNode = nil
-		return temp.payload, true
+		list.Head = list.Head.nextNode
+		list.Head.previousNode = nil
+		return temp.Payload, true
 	}
 
 	if index == list.lastIndex {
-		temp := list.lastNode
+		temp := list.LastNode
 		list.lastIndex--
 		temp.previousNode.nextNode = nil
-		return temp.payload, true
+		return temp.Payload, true
 	}
 
-	adjacentNode := list.head
+	adjacentNode := list.Head
 	var temp *Node
 	if index > list.lastIndex/2 {
-		adjacentNode = list.lastNode
+		adjacentNode = list.LastNode
 		for i := list.lastIndex - 1; i > index; i-- {
 			adjacentNode = adjacentNode.previousNode
 		}
@@ -90,38 +90,38 @@ func (list *Dll) Remove(index int) (interface{}, bool) {
 	}
 
 	list.lastIndex--
-	return temp.payload, true
+	return temp.Payload, true
 }
 
 // Replace : Replace a node a gven index with a new node
 func (list *Dll) Replace(index int, payload interface{}) (interface{}, bool) {
-	if index > list.lastIndex || index < 0 || list.head == nil {
+	if index > list.lastIndex || index < 0 || list.Head == nil {
 		return nil, false
 	}
 
 	newNode := new(Node)
-	newNode.payload = payload
+	newNode.Payload = payload
 
 	if index == 0 {
-		oldNode := list.head
+		oldNode := list.Head
 		newNode.nextNode = oldNode.nextNode
 		oldNode.nextNode.previousNode = newNode
-		list.head = newNode
-		return oldNode.payload, true
+		list.Head = newNode
+		return oldNode.Payload, true
 	}
 
 	if index == list.lastIndex {
-		oldNode := list.lastNode
+		oldNode := list.LastNode
 		oldNode.previousNode.nextNode = newNode
 		newNode.previousNode = oldNode.previousNode
-		list.lastNode = newNode
-		return oldNode.payload, true
+		list.LastNode = newNode
+		return oldNode.Payload, true
 	}
 
-	adjacentNode := list.head
+	adjacentNode := list.Head
 	var oldNode *Node
 	if index > list.lastIndex/2 {
-		adjacentNode = list.lastNode
+		adjacentNode = list.LastNode
 		for i := list.lastIndex - 1; i > index; i-- {
 			adjacentNode = adjacentNode.previousNode
 		}
@@ -141,13 +141,13 @@ func (list *Dll) Replace(index int, payload interface{}) (interface{}, bool) {
 		oldNode.nextNode.previousNode = newNode
 	}
 
-	return oldNode.payload, true
+	return oldNode.Payload, true
 }
 
 // InsertBefore : Insert a node before a given node. Returns pointer to newly inserted node, ok
 func (list *Dll) InsertBefore(referenceNode *Node, payload interface{}) (*Node, bool) {
 	newNode := new(Node)
-	newNode.payload = payload
+	newNode.Payload = payload
 	newNode.nextNode = referenceNode
 	newNode.previousNode = referenceNode.previousNode
 	referenceNode.previousNode = newNode
@@ -163,16 +163,16 @@ func (list *Dll) Get(index int) (*Node, bool) {
 	}
 
 	if index == 0 {
-		return list.head, true
+		return list.Head, true
 	}
 
 	if index == list.lastIndex {
-		return list.lastNode, true
+		return list.LastNode, true
 	}
 
-	adjacentNode := list.head
+	adjacentNode := list.Head
 	if index > list.lastIndex/2 {
-		adjacentNode = list.lastNode
+		adjacentNode = list.LastNode
 		for i := list.lastIndex - 1; i > index; i-- {
 			adjacentNode = adjacentNode.previousNode
 		}
@@ -186,14 +186,14 @@ func (list *Dll) Get(index int) (*Node, bool) {
 
 // IndexOf : Finds first occurance given payload in the list, if found returns its index else -1
 func (list *Dll) IndexOf(payload interface{}) (int, bool) {
-	currentNode := list.head
+	currentNode := list.Head
 	if currentNode == nil {
 		fmt.Println("Empty list")
 		return -1, false
 	}
 	i := 0
 	for {
-		if currentNode.payload == payload {
+		if currentNode.Payload == payload {
 			return i, true
 		}
 		if currentNode.nextNode == nil {
@@ -207,9 +207,9 @@ func (list *Dll) IndexOf(payload interface{}) (int, bool) {
 
 // Print : Print the list using fmt.Println, set inReverse to true for reverse order, can be used for debugging
 func (list *Dll) Print(inReverse bool) {
-	currentNode := list.head
+	currentNode := list.Head
 	if inReverse {
-		currentNode = list.lastNode
+		currentNode = list.LastNode
 	}
 
 	if currentNode == nil {
@@ -241,14 +241,14 @@ func (list *Dll) Length() int {
 // ToSlice : Returns the elements present in the list as an array, set inReverse to true for reverse order
 func (list *Dll) ToSlice(inReverse bool) []interface{} {
 	elementsArray := []interface{}{}
-	if list.head == nil {
+	if list.Head == nil {
 		return elementsArray
 	}
 
 	if inReverse {
-		currentNode := list.lastNode
+		currentNode := list.LastNode
 		for {
-			elementsArray = append(elementsArray, currentNode.payload)
+			elementsArray = append(elementsArray, currentNode.Payload)
 			if currentNode.previousNode == nil {
 				break
 			}
@@ -257,9 +257,9 @@ func (list *Dll) ToSlice(inReverse bool) []interface{} {
 		return elementsArray
 	}
 
-	currentNode := list.head
+	currentNode := list.Head
 	for {
-		elementsArray = append(elementsArray, currentNode.payload)
+		elementsArray = append(elementsArray, currentNode.Payload)
 		if currentNode.nextNode == nil {
 			break
 		}
@@ -270,16 +270,16 @@ func (list *Dll) ToSlice(inReverse bool) []interface{} {
 
 // Clear : Clears the list
 func (list *Dll) Clear() {
-	list.head = nil
-	list.lastNode = nil
+	list.Head = nil
+	list.LastNode = nil
 }
 
 // InitList : Instantiate a new linked list
 func InitList(payload interface{}) *Dll {
 	list := new(Dll)
-	list.head = &Node{
-		payload: payload,
+	list.Head = &Node{
+		Payload: payload,
 	}
-	list.lastNode = list.head
+	list.LastNode = list.Head
 	return list
 }
