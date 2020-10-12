@@ -2,6 +2,8 @@
 
 Packages of commonly used data structures and algorithms. Supports go module.
 
+## Note: This is a WIP, contributions are welcomed.
+
 ## Table of contents
 * [Quickstart](#Quickstart)
 * [Installation](#Installation)
