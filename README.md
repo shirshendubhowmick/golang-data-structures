@@ -2,6 +2,8 @@
 
 Packages of commonly used data structures and algorithms. Supports go module.
 
+[![Tests](https://github.com/shirshendubhowmick/golang-data-structures/actions/workflows/tests.yml/badge.svg)](https://github.com/shirshendubhowmick/golang-data-structures/actions/workflows/tests.yml)
+
 ## Note: This is a WIP project, contributions are welcomed.
 
 ## Table of contents
