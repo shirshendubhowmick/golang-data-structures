@@ -2,7 +2,7 @@ package binarytree
 
 import "errors"
 
-var ErrNotEmptyForInsertion = errors.New("Node child poistions not empty for insertion")
+var SErrNotEmptyForInsertion = errors.New("Node child poistions not empty for insertion")
 var ErrEmptyForDeletion = errors.New("Node child poistions is already empty")
 
 type Node struct {
@@ -18,7 +18,7 @@ type BinaryTree struct {
 
 func (tree *BinaryTree) InsertLeft(node *Node, payload interface{}) (*Node, error) {
 	if node.leftNode != nil {
-		return nil, ErrNotEmptyForInsertion
+		return nil, SErrNotEmptyForInsertion
 	}
 
 	newNode := new(Node)
@@ -30,7 +30,7 @@ func (tree *BinaryTree) InsertLeft(node *Node, payload interface{}) (*Node, erro
 
 func (tree *BinaryTree) InserRight(node *Node, payload interface{}) (*Node, error) {
 	if node.rightNode != nil {
-		return nil, ErrNotEmptyForInsertion
+		return nil, SErrNotEmptyForInsertion
 	}
 
 	newNode := new(Node)
