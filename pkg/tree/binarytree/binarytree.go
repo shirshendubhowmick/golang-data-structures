@@ -12,11 +12,7 @@ type Node struct {
 	parentNode *Node
 }
 
-type BinaryTree struct {
-	Root *Node
-}
-
-func (tree *BinaryTree) InsertLeft(node *Node, payload interface{}) (*Node, error) {
+func (node *Node) InsertLeft(payload interface{}) (*Node, error) {
 	if node.leftNode != nil {
 		return nil, ErrNotEmptyForInsertion
 	}
@@ -28,7 +24,7 @@ func (tree *BinaryTree) InsertLeft(node *Node, payload interface{}) (*Node, erro
 	return newNode, nil
 }
 
-func (tree *BinaryTree) InserRight(node *Node, payload interface{}) (*Node, error) {
+func (node *Node) InserRight(payload interface{}) (*Node, error) {
 	if node.rightNode != nil {
 		return nil, ErrNotEmptyForInsertion
 	}
@@ -40,7 +36,7 @@ func (tree *BinaryTree) InserRight(node *Node, payload interface{}) (*Node, erro
 	return newNode, nil
 }
 
-func (tree *BinaryTree) DeleteLeft(node *Node) (*Node, error) {
+func (node *Node) DeleteLeft() (*Node, error) {
 	if node.leftNode == nil {
 		return nil, ErrEmptyForDeletion
 	}
@@ -51,7 +47,7 @@ func (tree *BinaryTree) DeleteLeft(node *Node) (*Node, error) {
 	return deletedNode, nil
 }
 
-func (tree *BinaryTree) DeleteRight(node *Node) (*Node, error) {
+func (node *Node) DeleteRight() (*Node, error) {
 	if node.rightNode == nil {
 		return nil, ErrEmptyForDeletion
 	}
@@ -60,6 +56,10 @@ func (tree *BinaryTree) DeleteRight(node *Node) (*Node, error) {
 	deletedNode.parentNode = nil
 	node.rightNode = nil
 	return deletedNode, nil
+}
+
+type BinaryTree struct {
+	Root *Node
 }
 
 func Init(payload interface{}) *BinaryTree {
