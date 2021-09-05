@@ -62,19 +62,19 @@ type BinaryTree struct {
 	Root *Node
 }
 
-func (tree *BinaryTree) InOrder() []interface{} {
+func (tree *BinaryTree) ToSliceInOrder() []interface{} {
 	payloadSlice := make([]interface{}, 0)
 	inOrderTraversal(tree.Root, &payloadSlice)
 	return payloadSlice
 }
 
-func (tree *BinaryTree) PreOrder() []interface{} {
+func (tree *BinaryTree) ToSlicePreOrder() []interface{} {
 	payloadSlice := make([]interface{}, 0)
 	preOrderTraversal(tree.Root, &payloadSlice)
 	return payloadSlice
 }
 
-func (tree *BinaryTree) PostOrder() []interface{} {
+func (tree *BinaryTree) ToSlicePostOrder() []interface{} {
 	payloadSlice := make([]interface{}, 0)
 	postOrderTraversal(tree.Root, &payloadSlice)
 	return payloadSlice

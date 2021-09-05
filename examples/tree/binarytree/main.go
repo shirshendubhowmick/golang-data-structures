@@ -16,7 +16,7 @@ func main() {
 	node.InsertLeft(10)
 	node.InsertRight(12)
 
-	fmt.Println(tree.InOrder())
-	fmt.Println(tree.PreOrder())
-	fmt.Println(tree.PostOrder())
+	fmt.Println(tree.ToSliceInOrder())
+	fmt.Println(tree.ToSlicePreOrder())
+	fmt.Println(tree.ToSlicePostOrder())
 }
