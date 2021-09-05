@@ -24,7 +24,7 @@ func (node *Node) InsertLeft(payload interface{}) (*Node, error) {
 	return newNode, nil
 }
 
-func (node *Node) InserRight(payload interface{}) (*Node, error) {
+func (node *Node) InsertRight(payload interface{}) (*Node, error) {
 	if node.rightNode != nil {
 		return nil, ErrNotEmptyForInsertion
 	}
@@ -62,8 +62,28 @@ type BinaryTree struct {
 	Root *Node
 }
 
+func (tree *BinaryTree) InOrder() []interface{} {
+	payloadSlice := make([]interface{}, 0)
+	inOrderTraversal(tree.Root, &payloadSlice)
+	return payloadSlice
+}
+
+func (tree *BinaryTree) PreOrder() []interface{} {
+	payloadSlice := make([]interface{}, 0)
+	preOrderTraversal(tree.Root, &payloadSlice)
+	return payloadSlice
+}
+
+func (tree *BinaryTree) PostOrder() []interface{} {
+	payloadSlice := make([]interface{}, 0)
+	postOrderTraversal(tree.Root, &payloadSlice)
+	return payloadSlice
+}
+
 func Init(payload interface{}) *BinaryTree {
 	tree := new(BinaryTree)
+	tree.Root = new(Node)
+
 	tree.Root.Payload = payload
 
 	return tree
