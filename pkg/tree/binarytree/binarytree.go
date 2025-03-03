@@ -87,6 +87,20 @@ func (n *Node) DeleteRight() (Payload, error) {
 	return payload, nil
 }
 
+func (n *Node) Height() int {
+	if n == nil {
+		return 0
+	}
+
+	leftDepth := n.leftNode.Height()
+	rightDepth := n.rightNode.Height()
+
+	if leftDepth > rightDepth {
+		return leftDepth + 1
+	}
+	return rightDepth + 1
+}
+
 // ToSliceInOrder : Returns a slice of the tree in in-order traversal
 func (bt *BinaryTree) ToSliceInOrder() *[]Payload {
 	if bt.Root == nil {
@@ -118,6 +132,11 @@ func (bt *BinaryTree) ToSlicePostOrder() *[]Payload {
 	s := make([]Payload, bt.Root.nodesCount)
 	traversePostOrder(bt.Root, &s)
 	return &s
+}
+
+// Depth : Returns the depth of the tree
+func (tr *BinaryTree) Depth() int {
+	return tr.Root.Height()
 }
 
 // Init : Initializes a new binary tree with the given payload
