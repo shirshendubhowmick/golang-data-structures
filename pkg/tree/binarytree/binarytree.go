@@ -46,23 +46,23 @@ func traversePostOrder(node *Node, result *[]Payload) {
 }
 
 // InsertLeft : Inserts a node to the left of the current node
-func (n *Node) InsertLeft(payload Payload) error {
+func (n *Node) InsertLeft(payload Payload) (*Node, error) {
 	if n.leftNode != nil {
-		return ErrNotEmptyForInsertion
+		return nil, ErrNotEmptyForInsertion
 	}
 
 	n.leftNode = &Node{Payload: payload, parentNode: n}
-	return nil
+	return n.leftNode, nil
 }
 
 // InsertRight : Inserts a node to the right of the current node
-func (n *Node) InsertRight(payload Payload) error {
+func (n *Node) InsertRight(payload Payload) (*Node, error) {
 	if n.rightNode != nil {
-		return ErrNotEmptyForInsertion
+		return nil, ErrNotEmptyForInsertion
 	}
 
 	n.rightNode = &Node{Payload: payload, parentNode: n}
-	return nil
+	return n.rightNode, nil
 }
 
 // DeleteLeft : Deletes the left child of the node
@@ -142,6 +142,7 @@ func (tr *BinaryTree) Depth() int {
 // Init : Initializes a new binary tree with the given payload
 func Init(payload interface{}) *BinaryTree {
 	tree := new(BinaryTree)
+	tree.Root = new(Node)
 	tree.Root.Payload = payload
 
 	return tree
